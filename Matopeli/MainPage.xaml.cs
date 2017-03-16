@@ -26,5 +26,25 @@ namespace Matopeli
         {
             this.InitializeComponent();
         }
+
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ScoreButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

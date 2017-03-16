@@ -8,6 +8,13 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel VerticalAlignment="Center">
+            <Button x:Name="PlayButton" Content="Play game" Width="110" HorizontalAlignment="Center" Click="PlayButton_Click"/>
+            <Button x:Name="ScoreButton" Content="Highscores" Width="110" HorizontalAlignment="Center" Margin="0,10,0,0" Click="ScoreButton_Click"/>
+            <Button x:Name="InfoButton" Content="Instructions" Width="110" HorizontalAlignment="Center" Margin="0,10,0,0" Click="InfoButton_Click"/>
+            <Button x:Name="ExitButton" Content="Exit game" Width="110" HorizontalAlignment="Center" Margin="0,10,0,0" Click="ExitButton_Click"/>
+        </StackPanel>
+
 
     </Grid>
 </Page>
