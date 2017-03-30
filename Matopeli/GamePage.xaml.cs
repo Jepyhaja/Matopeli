@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,7 +25,7 @@ namespace Matopeli
     {
 
         // snake
-        private Snake sneikki;
+        private Snake snake;
 
         // foods, food
 
@@ -42,10 +43,42 @@ namespace Matopeli
         {
             this.InitializeComponent();
 
+            // create snake
+            snake = new Snake
+            {
+                LocationX = GameBG.Width / 2,
+                LocationY = GameBG.Height / 2
+            };
+
+            //add snake
+            GameBG.Children.Add(snake);
+
             //key listener
 
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+            Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
 
+
+        }
+
+        private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        {
+            switch (args.VirtualKey)
+            {
+                case VirtualKey.Up:
+                    UpPressed = false;
+                    break;
+                case VirtualKey.Down:
+                    DownPressed = false;
+                    break;
+                case VirtualKey.Left:
+                    LeftPressed = false;
+                    break;
+                case VirtualKey.Right:
+                    RightPressed = false;
+                    break;
+
+            }
         }
 
         private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
@@ -53,6 +86,18 @@ namespace Matopeli
             switch(args.VirtualKey)
             {
                 case VirtualKey.Up:
+                    UpPressed = true;
+                    break;
+                case VirtualKey.Down:
+                    DownPressed = true;
+                    break;
+                case VirtualKey.Left:
+                    LeftPressed = true;
+                    break;
+                case VirtualKey.Right:
+                    RightPressed = true;
+                    break;
+
             }
         }
 
