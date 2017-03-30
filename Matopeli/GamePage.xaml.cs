@@ -22,21 +22,25 @@ namespace Matopeli
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        // snake
+
+        // items, item
+
+        private List<Item> items;
+
+        // keypresshandler
+
+        // gamelooptimer
+
+        // audio
+
         public GamePage()
         {
             this.InitializeComponent();
 
-            // snake
 
-            // foods, food
 
-            // keypresshandler
-
-            //gamelooptimer
-
-            //audio
-
-        }
+    }
 
         private void BackButtonGP_Click(object sender, RoutedEventArgs e)
         {
