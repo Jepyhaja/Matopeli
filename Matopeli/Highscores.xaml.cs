@@ -34,7 +34,7 @@ namespace Matopeli
 
             if (rootFrame.CanGoBack)
             {
-                rootFrame.GoBack(); //nisti
+                rootFrame.GoBack();
             }
         }
     }

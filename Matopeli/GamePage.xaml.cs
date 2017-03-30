@@ -25,6 +25,17 @@ namespace Matopeli
         public GamePage()
         {
             this.InitializeComponent();
+
+            // snake
+
+            // foods, food
+
+            // keypresshandler
+
+            //gamelooptimer
+
+            //audio
+
         }
 
         private void BackButtonGP_Click(object sender, RoutedEventArgs e)
@@ -34,7 +45,7 @@ namespace Matopeli
 
             if (rootFrame.CanGoBack)
             {
-                rootFrame.GoBack(); //omg
+                rootFrame.GoBack();
             }
         }
     }
