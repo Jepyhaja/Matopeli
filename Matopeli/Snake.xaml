@@ -9,13 +9,14 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Rectangle Width="80" Height="80">
-        <Rectangle.Fill>
-            
-            
-        </Rectangle.Fill>
-        
-    </Rectangle>
-    
-    
+    <Ellipse Width="80" Height="80">
+        <Ellipse.Fill>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF5B0202" Offset="0.482"/>
+                <GradientStop Color="#FFEC0707" Offset="1"/>
+            </LinearGradientBrush>
+        </Ellipse.Fill>
+    </Ellipse>
+
+
 </UserControl>
