@@ -27,7 +27,7 @@ namespace Matopeli
             this.InitializeComponent();
 
             // snake
-
+             // kurwa ADDED
             // foods, food
 
             // keypresshandler
