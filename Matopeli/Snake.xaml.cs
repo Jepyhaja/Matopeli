@@ -19,9 +19,42 @@ namespace Matopeli
 {
     public sealed partial class Snake : UserControl
     {
+
+        //speed
+        private readonly double MaxSpeed = 35;
+        private double speed;
+
+        //direction
+        private int directionX = 1; // 1 or -1
+        private int directionY = 1; // 1 or -1
+        
+        public double LocationX { get; set; }
+        public double LocationY { get; set; }
+
         public Snake()
         {
             this.InitializeComponent();
+
         }
+
+        // move
+        public void Move()
+        {
+            //constant speed = 35
+            //movement per 1 game loop
+            LocationX -= directionX * speed;
+            LocationY -= directionY * speed;
+ 
+        }
+
+        
+        //update location
+
+        public void SetLocation()
+        {
+            SetValue(Canvas.LeftProperty, LocationX);
+            SetValue(Canvas.TopProperty, LocationY);
+        }
+        
     }
 }

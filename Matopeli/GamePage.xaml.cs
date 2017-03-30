@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,7 +23,9 @@ namespace Matopeli
     /// </summary>
     public sealed partial class GamePage : Page
     {
-        // snake
+        public GamePage()
+        {
+            this.InitializeComponent();
 
         // items, item
 
@@ -39,8 +42,9 @@ namespace Matopeli
             this.InitializeComponent();
 
 
+            //audio
 
-    }
+        }
 
         private void BackButtonGP_Click(object sender, RoutedEventArgs e)
         {
