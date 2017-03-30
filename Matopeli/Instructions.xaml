@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="Matopeli.Instructions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Matopeli"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Color x:Key="Color1">#FF953232</Color>
+    </Page.Resources>
+
+    <Grid RenderTransformOrigin="0.5,0.5" Background="White">
+        <Button x:Name="BackButtonINS" Content="Back" HorizontalAlignment="Left" Margin="10,678,0,0" VerticalAlignment="Top" Click="BackButtonINS_Click"/>
+
+    </Grid>
+</Page>

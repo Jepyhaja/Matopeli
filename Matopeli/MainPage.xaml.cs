@@ -29,22 +29,22 @@ namespace Matopeli
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(GamePage));
         }
 
         private void ScoreButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(Highscores));
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(Instructions));
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }
