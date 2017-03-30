@@ -24,7 +24,7 @@ namespace Matopeli
     public sealed partial class GamePage : Page
     {
 
-        //audio
+        //audioelement
         private MediaElement mediaElement;
 
         public GamePage()
