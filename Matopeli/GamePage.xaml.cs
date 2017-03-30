@@ -22,20 +22,38 @@ namespace Matopeli
     /// </summary>
     public sealed partial class GamePage : Page
     {
+
+        // snake
+        private Snake sneikki;
+
+        // foods, food
+
+        // keypresshandler
+        private bool UpPressed;
+        private bool DownPressed;
+        private bool LeftPressed;
+        private bool RightPressed;
+
+        //gamelooptimer
+
+        //audio
+
         public GamePage()
         {
             this.InitializeComponent();
 
-            // snake
+            //key listener
 
-            // foods, food
+            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
 
-            // keypresshandler
+        }
 
-            //gamelooptimer
-
-            //audio
-
+        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        {
+            switch(args.VirtualKey)
+            {
+                case VirtualKey.Up:
+            }
         }
 
         private void BackButtonGP_Click(object sender, RoutedEventArgs e)
