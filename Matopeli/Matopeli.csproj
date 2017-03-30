@@ -126,7 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\bottle.png" />
-    <Content Include="Assets\eitaaoomitaamehua.wav" />
+    <Content Include="Assets\mehu.wav" />
     <Content Include="Assets\Miesääni.wav" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
