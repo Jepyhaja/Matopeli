@@ -21,14 +21,17 @@ namespace Matopeli
     {
 
         //speed
-        private double speed = 35;
+        private double speed = 5;
 
         //direction
         private int directionX = 1; // 1 or -1
         private int directionY = 1; // 1 or -1
+
         
+
         public double LocationX { get; set; }
         public double LocationY { get; set; }
+
 
         public Snake()
         {
@@ -36,17 +39,27 @@ namespace Matopeli
 
         }
 
-        // move
-        public void Move()
+        // moveX
+        public void moveX(int DirectionX)
         {
-            //constant speed = 35
-            //movement per 1 game loop
-            LocationX -= directionX * speed;
-            LocationY -= directionY * speed;
- 
+            //speed = 5
+            
+           
+
+        }
+        public void moveY(int DirectionY)
+        {
+            //speed = 5
+            
+
+        }
+        public void move(int DirectionY, int DirectionX)
+        {
+            LocationX -= directionX * speed * DirectionX;
+            LocationY -= directionY * speed * DirectionY;
         }
 
-        
+
         //update location
 
         public void SetLocation()
