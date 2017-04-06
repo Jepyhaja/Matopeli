@@ -37,8 +37,14 @@ namespace Matopeli
         private bool RightPressed;
 
         //snake movedirection
-        public int currentdirX { get; set; }
-        public int curretndirY { get; set; }
+        public int currentDirX { get; set; }
+        public int currentDirY { get; set; }
+
+        public bool goingUp;
+        public bool goingDown;
+        public bool goingLeft;
+        public bool goingRight;
+
 
         //gamelooptimer
         private DispatcherTimer timer;
@@ -75,7 +81,44 @@ namespace Matopeli
         private void timer_tick(object sender, object e)
         {
 
-            if(UpPressed)
+            if (UpPressed && goingDown == false)
+            {
+                currentDirY = 1;
+                currentDirX = 0;
+                goingUp = true;
+                goingLeft = false;
+                goingRight = false;
+                goingDown = false;
+            }
+            if (DownPressed && goingUp == false)
+            {
+                currentDirY = -1;
+                currentDirX = 0;
+                goingUp = false;
+                goingLeft = false;
+                goingRight = false;
+                goingDown = true;
+            }
+            if (LeftPressed && goingRight == false)
+            {
+                currentDirY = 0;
+                currentDirX = 1;
+                goingUp = false;
+                goingLeft = true;
+                goingRight = false;
+                goingDown = false;
+            }
+            if (RightPressed && goingLeft == false)
+            {
+                currentDirY = 0;
+                currentDirX = -1;
+                goingUp = false;
+                goingLeft = false;
+                goingRight = true;
+                goingDown = false;
+            }
+
+            snake.move(currentDirY, currentDirX);
 
             snake.SetLocation();
  
