@@ -36,7 +36,12 @@ namespace Matopeli
         private bool LeftPressed;
         private bool RightPressed;
 
+        //snake movedirection
+        public int currentdirX { get; set; }
+        public int curretndirY { get; set; }
+
         //gamelooptimer
+        private DispatcherTimer timer;
 
         //audio
 
@@ -59,8 +64,23 @@ namespace Matopeli
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
 
-
+            //start gameloop
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan (0,0,0,0,1000/60);
+            timer.Tick += timer_tick;
+            timer.Start();
         }
+
+        //Gameloop
+        private void timer_tick(object sender, object e)
+        {
+
+            if(UpPressed)
+
+            snake.SetLocation();
+ 
+        }
+
 
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {

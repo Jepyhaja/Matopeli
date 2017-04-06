@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="80"
-    d:DesignWidth="80">
+    d:DesignHeight="25"
+    d:DesignWidth="25">
 
-    <Ellipse Width="80" Height="80">
+    <Ellipse Width="25" Height="25">
         <Ellipse.Fill>
             <LinearGradientBrush EndPoint="0.7,1.4" StartPoint="1.5,0.1">
                 <GradientStop Color="#FF5B0202" Offset="0.482"/>
