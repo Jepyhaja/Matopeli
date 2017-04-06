@@ -8,8 +8,9 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
-    <Grid>
-
-    </Grid>
+    <Rectangle Width="100" Height="120">
+        <Rectangle.Fill>
+            <ImageBrush ImageSource="Assets/bottle.png"></ImageBrush>
+        </Rectangle.Fill>
+    </Rectangle>
 </UserControl>

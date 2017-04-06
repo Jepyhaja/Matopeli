@@ -21,6 +21,9 @@ namespace Matopeli
     {
         // position
 
+            public double LocationX { get; set; }
+            public double LocationY { get; set; }
+
         // effects
 
         // size
@@ -28,6 +31,14 @@ namespace Matopeli
         public Item()
         {
             this.InitializeComponent();
+            Width = 110;
+            Height = 120;
+        }
+
+        public void SetLocation()
+        {
+            SetValue(Canvas.LeftProperty, LocationX);
+            SetValue(Canvas.TopProperty, LocationY);
         }
     }
 }
