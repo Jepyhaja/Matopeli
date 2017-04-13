@@ -49,6 +49,9 @@ namespace Matopeli
         //gamelooptimer
         private DispatcherTimer timer;
 
+        //timer for keypresshandeler
+        private DispatcherTimer keyTimer;
+
         //audio
 
         public GamePage()
@@ -70,17 +73,22 @@ namespace Matopeli
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
 
-            //start gameloop
+            //start gameloop 10FPS
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan (0,0,0,0,1000/60);
+            timer.Interval = new TimeSpan (0,0,0,0,1000/10);
             timer.Tick += timer_tick;
             timer.Start();
+
+            //start keypresshandler 60FPS
+            keyTimer = new DispatcherTimer();
+            keyTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
+            keyTimer.Tick += keyTimer_tick;
+            keyTimer.Start();
         }
 
-        //Gameloop
-        private void timer_tick(object sender, object e)
-        {
-
+        private void keyTimer_tick(object sender, object e){
+            // keypresshandelr tick
+            
             if (UpPressed && goingDown == false)
             {
                 currentDirY = 1;
@@ -117,9 +125,21 @@ namespace Matopeli
                 goingRight = true;
                 goingDown = false;
             }
+            
+        }
+
+        //Gameloop 10FPS
+        private void timer_tick(object sender, object e)
+        {
+
+            // madon collision handler seiniin
+            if (snake.LocationX > GameBG.Width -25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
+            {
+                //gameOver();
+                timer.Stop();
+            }
 
             snake.move(currentDirY, currentDirX);
-
             snake.SetLocation();
  
         }

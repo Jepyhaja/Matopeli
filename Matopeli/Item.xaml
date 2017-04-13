@@ -9,8 +9,15 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <Rectangle Width="100" Height="120">
-        <Rectangle.Fill>
-            <ImageBrush ImageSource="Assets/bottle.png"></ImageBrush>
-        </Rectangle.Fill>
-    </Rectangle>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Assets/haista_lerssi.png"
+                    Stretch="None"
+                    AlignmentX="Left"
+                    AlignmentY="Top">
+                    <ImageBrush.Transform>
+                        <TranslateTransform x:Name="SpriteSheetOffset" />
+                    </ImageBrush.Transform>
+                </ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
 </UserControl>
