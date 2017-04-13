@@ -20,19 +20,31 @@ namespace Matopeli
     public sealed partial class Item : UserControl
     {
         // position
+        public double LocationX { get; set; }
+        public double LocationY { get; set; }
 
-            public double LocationX { get; set; }
-            public double LocationY { get; set; }
+        // item that is shown
+        public int currentFrame = 0; // 0 = apple 1 = perse 2 = vodka 3 = risu 4 = majoneesi 5 = negev
+        public int frameHeigth = 119;
 
-        // effects
+        // item properties
+        public double moveMultiplier { get; set; }
 
-        // size
+
 
         public Item()
         {
             this.InitializeComponent();
-            Width = 110;
-            Height = 120;
+ 
+            Random rand = new Random();
+            // frame
+            currentFrame = rand.Next(0, 5);
+            if (currentFrame == 1)
+            {
+                moveMultiplier = 1.2;
+            }
+            // set offset
+            SpriteSheetOffset.Y = currentFrame * -frameHeigth;
         }
 
         public void SetLocation()
