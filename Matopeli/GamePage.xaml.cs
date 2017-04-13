@@ -67,6 +67,7 @@ namespace Matopeli
 
             //add snake
             GameBG.Children.Add(snake);
+            itemSpawn();
 
             //key listener
 
@@ -126,6 +127,22 @@ namespace Matopeli
                 goingDown = false;
             }
             
+        }
+
+        private void itemSpawn()
+        {
+            double itemX = GameBG.Width;
+            double itemY = GameBG.Height;
+            Random random = new Random();
+            Item item = new Item();
+            item.LocationX = random.Next(0, Convert.ToInt32(itemX) - 100);
+            item.LocationY = random.Next(0, Convert.ToInt32(itemY) - 100);
+
+            Random rand = new Random();
+            item.currentFrame = rand.Next(0, 5);
+            GameBG.Children.Add(item);
+            item.SetLocation();
+
         }
 
         //Gameloop 10FPS
