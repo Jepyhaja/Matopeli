@@ -30,7 +30,7 @@ namespace Matopeli
         // item properties
         public double moveMultiplier { get; set; }
 
-
+        
 
         public Item()
         {

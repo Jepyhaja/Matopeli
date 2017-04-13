@@ -27,6 +27,7 @@ namespace Matopeli
 
         // snake
         private Snake snake;
+        private Item item;
 
         // items, item
 
@@ -87,10 +88,30 @@ namespace Matopeli
             keyTimer.Start();
         }
 
+        private void checkCollision()
+        {
+            Rect SnakeRect = new Rect(snake.LocationX, snake.LocationY, snake.ActualHeight, snake.ActualWidth);
+
+            Rect ItemRect = new Rect(item.LocationX, item.LocationY, item.ActualHeight, item.ActualWidth);
+
+            //intersect checker
+            SnakeRect.Intersect(ItemRect);
+
+
+            if (!SnakeRect.IsEmpty)
+            {
+                GameBG.Children.Remove(item);
+                
+            }
+
+        }
+
+
         private void keyTimer_tick(object sender, object e){
-            // keypresshandelr tick
-            
-            if (UpPressed && goingDown == false)
+
+                // keypresshandelr tick
+
+                if (UpPressed && goingDown == false)
             {
                 currentDirY = 1;
                 currentDirX = 0;
@@ -126,8 +147,16 @@ namespace Matopeli
                 goingRight = true;
                 goingDown = false;
             }
+
             
         }
+
+
+
+
+
+
+
 
         private void itemSpawn()
         {
@@ -137,6 +166,7 @@ namespace Matopeli
             Item item = new Item();
             item.LocationX = random.Next(0, Convert.ToInt32(itemX) - 100);
             item.LocationY = random.Next(0, Convert.ToInt32(itemY) - 100);
+
 
             Random rand = new Random();
             item.currentFrame = rand.Next(0, 5);
@@ -148,7 +178,7 @@ namespace Matopeli
         //Gameloop 10FPS
         private void timer_tick(object sender, object e)
         {
-
+            
             // madon collision handler seiniin
             if (snake.LocationX > GameBG.Width -25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
             {
@@ -158,7 +188,8 @@ namespace Matopeli
 
             snake.move(currentDirY, currentDirX);
             snake.SetLocation();
- 
+
+            
         }
 
 
