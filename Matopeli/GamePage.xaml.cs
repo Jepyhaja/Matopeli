@@ -133,7 +133,7 @@ namespace Matopeli
         {
 
             // madon collision handler seiniin
-            if (snake.LocationX > GameBG.Width -32 || snake.LocationX < 6 || snake.LocationY < 6 || snake.LocationY > GameBG.Height - 32)
+            if (snake.LocationX > GameBG.Width -25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
             {
                 //gameOver();
                 timer.Stop();
