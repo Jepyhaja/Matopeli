@@ -17,11 +17,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Matopeli
 {
-    public sealed partial class Snake : UserControl
+    public sealed partial class  Snake : UserControl 
     {
 
         //speed
-        private double speed = 5;
+        private double speed = 25;
 
         //direction
         private int directionX = 1; // 1 or -1
@@ -39,26 +39,11 @@ namespace Matopeli
 
         }
 
-        // moveX
-        public void moveX(int DirectionX)
-        {
-            //speed = 5
-            
-           
-
-        }
-        public void moveY(int DirectionY)
-        {
-            //speed = 5
-            
-
-        }
         public void move(int DirectionY, int DirectionX)
         {
             LocationX -= directionX * speed * DirectionX;
             LocationY -= directionY * speed * DirectionY;
         }
-
 
         //update location
 
@@ -67,6 +52,7 @@ namespace Matopeli
             SetValue(Canvas.LeftProperty, LocationX);
             SetValue(Canvas.TopProperty, LocationY);
         }
+
         
     }
 }
