@@ -21,7 +21,7 @@ namespace Matopeli
     {
 
         //speed
-        private double speed = 5;
+        private double speed = 25;
 
         //direction
         private int directionX = 1; // 1 or -1
