@@ -29,7 +29,6 @@ namespace Matopeli
         private Snake snake;
 
         // items, item
-        // private List<Item> items;
 
         // keypresshandler
         private bool UpPressed;
@@ -50,6 +49,9 @@ namespace Matopeli
         //gamelooptimer
         private DispatcherTimer timer;
 
+        //timer for keypresshandeler
+        private DispatcherTimer keyTimer;
+
         //audio
 
         public GamePage()
@@ -65,26 +67,28 @@ namespace Matopeli
 
             //add snake
             GameBG.Children.Add(snake);
-            itemSpawn();
-
-            // items list initialization
 
             //key listener
 
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
 
-            //start gameloop
+            //start gameloop 10FPS
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0,0,0,0,1000/60);
+            timer.Interval = new TimeSpan (0,0,0,0,1000/10);
             timer.Tick += timer_tick;
             timer.Start();
 
+            //start keypresshandler 60FPS
+            keyTimer = new DispatcherTimer();
+            keyTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
+            keyTimer.Tick += keyTimer_tick;
+            keyTimer.Start();
         }
 
-        //Gameloop
-        private void timer_tick(object sender, object e)
-        {
+        private void keyTimer_tick(object sender, object e){
+            // keypresshandelr tick
+            
             if (UpPressed && goingDown == false)
             {
                 currentDirY = 1;
@@ -121,44 +125,25 @@ namespace Matopeli
                 goingRight = true;
                 goingDown = false;
             }
+            
+        }
+
+        //Gameloop 10FPS
+        private void timer_tick(object sender, object e)
+        {
+
+            // madon collision handler seiniin
+            if (snake.LocationX > GameBG.Width -25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
+            {
+                //gameOver();
+                timer.Stop();
+            }
 
             snake.move(currentDirY, currentDirX);
-
             snake.SetLocation();
  
         }
 
-        private void itemSpawn()
-        {
-            double itemX = GameBG.Width;
-            double itemY = GameBG.Height;
-            Random random = new Random();
-            Item item = new Item();
-            item.LocationX = random.Next(0, Convert.ToInt32(itemX) - 100);
-            item.LocationY = random.Next(0, Convert.ToInt32(itemY) - 100);
-
-            Random rand = new Random();
-            item.currentFrame = rand.Next(0, 5);
-            GameBG.Children.Add(item);
-            item.SetLocation();
-
-        }
-
-        //Item loop
-       /*  private void item_tick(object sender, object e)
-        {
-            itemSpawn();
-
-                //if snake hits item, add score, spawn new item and set new head
-                if (item.LocationX == snake.LocationX && item.LocationY == snake.LocationY)
-                {
-                    // score++;
-                    // itemSpawn();
-                    // setNewHead();  
-                }
-            } */
-
-        
 
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {
