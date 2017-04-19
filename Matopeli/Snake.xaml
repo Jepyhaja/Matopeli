@@ -8,15 +8,13 @@
     mc:Ignorable="d"
     d:DesignHeight="25"
     d:DesignWidth="25">
-
-    <Ellipse Width="25" Height="25">
-        <Ellipse.Fill>
+    <Rectangle Width="25" Height="25" RadiusX="15" RadiusY="15">
+        <Rectangle.Fill>
             <LinearGradientBrush EndPoint="0.7,1.4" StartPoint="1.5,0.1">
                 <GradientStop Color="#FF5B0202" Offset="0.482"/>
                 <GradientStop Color="#FFEC0707" Offset="1"/>
             </LinearGradientBrush>
-        </Ellipse.Fill>
-    </Ellipse>
-
+        </Rectangle.Fill>
+    </Rectangle>
 
 </UserControl>

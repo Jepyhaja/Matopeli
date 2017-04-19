@@ -25,11 +25,20 @@ namespace Matopeli
     public sealed partial class GamePage : Page
     {
 
+
+        //gameoverscreen
+        private bool gameOver = false;
+
+
+
+
         // snake
         private Snake snake;
         private Item item;
 
         // items, item
+
+
 
         // keypresshandler
         private bool UpPressed;
