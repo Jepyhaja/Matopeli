@@ -21,11 +21,10 @@ namespace Matopeli
     {
 
         //speed
-        private double speed = 25;
+        public double speed = 25;
 
         //direction
-        private int directionX = 1; // 1 or -1
-        private int directionY = 1; // 1 or -1
+        public string direction { get; set; }
 
         
 
@@ -39,11 +38,7 @@ namespace Matopeli
 
         }
 
-        public void move(int DirectionY, int DirectionX)
-        {
-            LocationX -= directionX * speed * DirectionX;
-            LocationY -= directionY * speed * DirectionY;
-        }
+        
 
         //update location
 

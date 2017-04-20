@@ -34,10 +34,12 @@ namespace Matopeli
 
         // snake
         private Snake snake;
+
+        // private snake list
+        private List<Snake> snakes;
+
+        // item
         private Item item;
-
-        // items, item
-
 
 
         // keypresshandler
@@ -68,17 +70,29 @@ namespace Matopeli
         {
             this.InitializeComponent();
 
+            snakes = new List<Snake>();
+
             // create snake
             snake = new Snake
             {
                 LocationX = GameBG.Width / 2,
                 LocationY = GameBG.Height / 2
             };
+           
+            snakes.Add(snake);
 
+            snake = new Snake
+            {
+                LocationX = (GameBG.Width / 2) + 25,
+                LocationY = (GameBG.Height / 2)
+            };
+            snakes.Add(snake);
+
+            
             //add snake
-            GameBG.Children.Add(snake);
+            GameBG.Children.Add(snakes[0]);
+            GameBG.Children.Add(snakes[1]); // +25 px X-akselilla
             itemSpawn();
-
             //key listener
 
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
@@ -99,9 +113,11 @@ namespace Matopeli
 
         private void checkCollision()
         {
-            Rect SnakeRect = new Rect(snake.LocationX, snake.LocationY, snake.ActualHeight, snake.ActualWidth);
 
-            Rect ItemRect = new Rect(item.LocationX, item.LocationY, item.ActualHeight, item.ActualWidth);
+
+            Rect SnakeRect = new Rect(snakes[0].LocationX, snakes[0].LocationY, snakes[0].ActualWidth, snakes[0].ActualHeight);
+
+            Rect ItemRect = new Rect(item.LocationX, item.LocationY, item.ActualWidth, item.ActualHeight);
 
             //intersect checker
             SnakeRect.Intersect(ItemRect);
@@ -110,6 +126,8 @@ namespace Matopeli
             if (!SnakeRect.IsEmpty)
             {
                 GameBG.Children.Remove(item);
+
+                itemSpawn();
                 
             }
 
@@ -120,59 +138,89 @@ namespace Matopeli
 
                 // keypresshandelr tick
 
-                if (UpPressed && goingDown == false)
+             if (UpPressed && snake.direction != "down")
             {
-                currentDirY = 1;
-                currentDirX = 0;
-                goingUp = true;
-                goingLeft = false;
-                goingRight = false;
-                goingDown = false;
+                snake.direction = "up";
             }
-            if (DownPressed && goingUp == false)
+            if (DownPressed && snake.direction != "up")
             {
-                currentDirY = -1;
-                currentDirX = 0;
-                goingUp = false;
-                goingLeft = false;
-                goingRight = false;
-                goingDown = true;
+                snake.direction = "down";
             }
-            if (LeftPressed && goingRight == false)
+            if (LeftPressed && snake.direction != "right")
             {
-                currentDirY = 0;
-                currentDirX = 1;
-                goingUp = false;
-                goingLeft = true;
-                goingRight = false;
-                goingDown = false;
+                snake.direction = "left";
             }
-            if (RightPressed && goingLeft == false)
+            if (RightPressed && snake.direction != "left")
             {
-                currentDirY = 0;
-                currentDirX = -1;
-                goingUp = false;
-                goingLeft = false;
-                goingRight = true;
-                goingDown = false;
+                snake.direction = "right";
             }
 
             
         }
 
 
+        //Gameloop 10FPS
+        private void timer_tick(object sender, object e)
+        {
+
+            // madon collision handler seiniin
+            if (snakes[0].LocationX > GameBG.Width - 25 || snakes[0].LocationX < 0 || snakes[0].LocationY < 0 || snakes[0].LocationY > GameBG.Height - 25)
+            {
+                //gameOver();
+                timer.Stop();
+            }
 
 
+            Move();
+            /*
+            snakes[0].SetLocation();
 
+            snakes[1].LocationX = snakes[0].LocationX + 25;
 
+            snakes[1].LocationY = snakes[0].LocationY + 25;
 
+            snakes[1].SetLocation();
+            */
 
-        private void itemSpawn()
+            /* for (int i = 0; i < snakes.Count; i++)
+             {
+
+                 snakes[i].SetLocation();
+
+             }*/
+
+            snakes[0].SetLocation();
+
+            checkCollision();
+            
+        }
+
+        private void Move()
+        {
+                
+        switch(snake.direction) {
+        case "up":
+                snakes[0].LocationY -= snake.speed;
+        break;
+        case "down":
+                snakes[0].LocationY += snake.speed;
+        break;
+        case "left":
+                snakes[0].LocationX -= snake.speed;
+        break;
+        case "right":
+                snakes[0].LocationX += snake.speed;
+        break;
+
+            }
+        }
+
+        public void itemSpawn()
         {
             double itemX = GameBG.Width;
             double itemY = GameBG.Height;
             Random random = new Random();
-            Item item = new Item();
+            item = new Item();
             item.LocationX = random.Next(0, Convert.ToInt32(itemX) - 100);
             item.LocationY = random.Next(0, Convert.ToInt32(itemY) - 100);
 
@@ -182,23 +230,6 @@ namespace Matopeli
             GameBG.Children.Add(item);
             item.SetLocation();
 
-        }
-
-        //Gameloop 10FPS
-        private void timer_tick(object sender, object e)
-        {
-            
-            // madon collision handler seiniin
-            if (snake.LocationX > GameBG.Width -25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
-            {
-                //gameOver();
-                timer.Stop();
-            }
-
-            snake.move(currentDirY, currentDirX);
-            snake.SetLocation();
-
-            
         }
 
 
