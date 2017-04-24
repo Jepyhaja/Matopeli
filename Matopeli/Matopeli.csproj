@@ -124,8 +124,7 @@
     <None Include="Matopeli_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\bottle.png" />
-    <Content Include="Assets\haista_lerssi.png" />
+    <Content Include="Assets\items.png" />
     <Content Include="Assets\mehu.wav" />
     <Content Include="Assets\Miesääni.wav" />
     <Content Include="Properties\Default.rd.xml" />

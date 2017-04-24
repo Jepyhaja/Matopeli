@@ -10,7 +10,7 @@
     d:DesignWidth="400">
     <Rectangle Width="100" Height="120">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="Assets/haista_lerssi.png"
+                <ImageBrush ImageSource="Assets/items.png"
                     Stretch="None"
                     AlignmentX="Left"
                     AlignmentY="Top">

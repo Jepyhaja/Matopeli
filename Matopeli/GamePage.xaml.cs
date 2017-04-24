@@ -25,12 +25,8 @@ namespace Matopeli
     public sealed partial class GamePage : Page
     {
 
-
-        //gameoverscreen
+        // gameoverscreen
         private bool gameOver = false;
-
-
-
 
         // snake
         private Snake snake;
@@ -46,7 +42,7 @@ namespace Matopeli
         // item
         private Item item;
 
-        //Snake length
+        // Snake length
         int length = 2; // item eaten -> length ++
 
         // keypresshandler
@@ -61,60 +57,55 @@ namespace Matopeli
         public bool goingLeft;
         public bool goingRight;
 
-        //flag to stop timerstart in keyTimer
+        // flag to stop timerstart in keyTimer
         public bool TimerOn = false;
 
-        //gamelooptimer contains all the methods like move, render etc
+        // gamelooptimer contains all the methods like move, render etc
         private DispatcherTimer timer;
 
-        //keypresshandler and the start argument for timer
+        // keypresshandler and the start argument for timer
         private DispatcherTimer keyTimer;
-
-
-        
-        //audio
-
-
-
+ 
+        // audio
 
         public GamePage()
         {
             this.InitializeComponent();
 
-            snakes = new List<Snake>(); //initialize list of snakes
-            points = new List<Point>(); //initialize list of coordinate points
+            snakes = new List<Snake>(); // initialize list of snakes
+            points = new List<Point>(); // initialize list of coordinate points
 
             // this dictates the starting position and length of the snake
             point = new Point(300, 300); // (X,Y) 
             points.Add(point);
             foreach (Point point in points)  // not neccessarily needed here
             {
-                snake = new Snake       //create snake so we can draw it
+                snake = new Snake       // create snake so we can draw it
                 {
-                    LocationX = point.X,  //useless(I guess)
-                    LocationY = point.Y   //useless(I guess)
+                    LocationX = point.X,  //useless (I guess)
+                    LocationY = point.Y   //useless (I guess)
                 };
-                snakes.Insert(0, snake);        //insert snake to the first slot of the snakes list
-                GameBG.Children.Insert(0, snakes[0]);   //draw the first snake in the snakes list to the canvas
-                snakes[0].SetLocation(point.X, point.Y); //set location for the snake drawn
+                snakes.Insert(0, snake);        // insert snake to the first slot of the snakes list
+                GameBG.Children.Insert(0, snakes[0]);   // draw the first snake in the snakes list to the canvas
+                snakes[0].SetLocation(point.X, point.Y); // set location for the snake drawn
 
             }
 
             // spawn first item
             itemSpawn(); 
 
-            //key listener
+            // key listener
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp;
 
-            //start gameloop 10FPS
+            // start gameloop 10FPS
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan (0,0,0,0,1000/10);
             timer.Tick += timer_tick;
             //timer.start(); is inside keyTimer_tick method
             
 
-            //start keypresshandler 60FPS
+            // start keypresshandler 60FPS
             keyTimer = new DispatcherTimer();
             keyTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             keyTimer.Tick += keyTimer_tick;
@@ -129,7 +120,7 @@ namespace Matopeli
 
             Rect ItemRect = new Rect(item.LocationX, item.LocationY, item.ActualWidth, item.ActualHeight);
 
-            //intersect checker
+            // check if item and snake are colliding
             SnakeRect.Intersect(ItemRect);
 
 
@@ -138,7 +129,8 @@ namespace Matopeli
                 GameBG.Children.Remove(item);
 
                 itemSpawn();
-                
+
+                length++;
             }
 
         }
@@ -146,7 +138,7 @@ namespace Matopeli
 
         private void keyTimer_tick(object sender, object e){
 
-                // keypresshandelr tick
+                // keypresshandler tick
 
              if (UpPressed && goingDown == false)
             {
@@ -178,7 +170,7 @@ namespace Matopeli
             }
 
             if ((UpPressed == true || DownPressed == true || LeftPressed == true || RightPressed == true) && TimerOn == false) {
-                timer.Start(); //start gamelogic after arrowkey is pressed.
+                timer.Start(); // start gamelogic after an arrowkey is pressed
                 TimerOn = true;
             }
 
@@ -191,9 +183,9 @@ namespace Matopeli
 
             Move();
 
-            Rendersnake();
+            renderSnake();
 
-            RemoveTail();
+            removeTail();
 
             // madon collision handler seiniin
             if (snake.LocationX > GameBG.Width - 25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
@@ -207,30 +199,27 @@ namespace Matopeli
             checkCollision();
             
         }
-        /// <summary>
-        /// https://gamedev.stackexchange.com/questions/24817/c-creating-a-simple-snake-game
-        /// </summary>
 
-       private void Rendersnake() //draws latest point as a snake 
+       private void renderSnake() // draws latest point as a snake 
         {
             
             snake = new Snake // create snake 
             {
-                LocationX = point.X, //the X cords of the latest point
-                LocationY = point.Y    //the Y cords of the latest point
+                LocationX = point.X, // the X cords of the latest point
+                LocationY = point.Y    // the Y cords of the latest point
             };
                 snakes.Insert(0, snake); // add snake to snakes as first
                 GameBG.Children.Insert(0, snakes[0]); // add as first to the canvas
                 snakes[0].SetLocation(point.X, point.Y); // draw snake to canvas
             }
         
-        private void RemoveTail() //this removes last point and last snake and corresponding snake from canvas
+        private void removeTail() // this removes last point and last snake and corresponding snake from canvas
         {
-            if(points.Count > length) //this argument dictates snakes length
+            if(points.Count > length) // this argument dictates snakes length
             {
-                GameBG.Children.Remove(snakes.Last());  //remove drawn snake form canvas, must be done first
+                GameBG.Children.Remove(snakes.Last());  // remove drawn snake form canvas, must be done first
                 snakes.Remove(snakes.Last());           
-                points.Remove(points.Last());           //remove last point to keep the wanted length
+                points.Remove(points.Last());           // remove last point to keep the wanted length
             }
         }
 
@@ -238,7 +227,7 @@ namespace Matopeli
 
 
 
-        private void Move() //this only creates new points for the render function to use
+        private void Move() // create new points for the render function to utilize later
         {
 
             if (goingUp == true) {
@@ -273,7 +262,7 @@ namespace Matopeli
             Random random = new Random();
             item = new Item();
             item.LocationX = random.Next(0, Convert.ToInt32(itemX) - 100);
-            item.LocationY = random.Next(0, Convert.ToInt32(itemY) - 100);
+            item.LocationY = random.Next(0, Convert.ToInt32(itemY) - 120);
 
 
             Random rand = new Random();
@@ -282,7 +271,7 @@ namespace Matopeli
             item.SetLocation();
 
         }
-        // --------------------------------------boring shit below-------------------
+        // basic setup for getting arrow keys to function
 
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
         {

@@ -24,8 +24,8 @@ namespace Matopeli
         public double LocationY { get; set; }
 
         // item that is shown
-        public int currentFrame = 0; // 0 = apple 1 = perse 2 = vodka 3 = risu 4 = majoneesi 5 = negev
-        public int frameHeigth = 119;
+        public int currentFrame = 0; 
+        public int frameHeigth = 120;
 
         // item properties
         public double moveMultiplier { get; set; }
