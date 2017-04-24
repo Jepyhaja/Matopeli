@@ -20,8 +20,9 @@ using Windows.UI.Xaml.Navigation;
 namespace Matopeli
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Page containing most game logic
     /// </summary>
+
     public sealed partial class GamePage : Page
     {
 
@@ -30,6 +31,7 @@ namespace Matopeli
 
         // snake
         private Snake snake;
+
         // list of snakes, we draw body with from this
         private List<Snake> snakes;
         
@@ -42,7 +44,7 @@ namespace Matopeli
         // item
         private Item item;
 
-        // Snake length
+        // snake length
         int length = 2; // item eaten -> length ++
 
         // keypresshandler
@@ -177,7 +179,7 @@ namespace Matopeli
         }
 
 
-        //Gameloop 10FPS
+        // Gameloop 10FPS
         private void timer_tick(object sender, object e)
         {
 
@@ -187,10 +189,10 @@ namespace Matopeli
 
             removeTail();
 
-            // madon collision handler seiniin
+            // checks if snake is hitting the wall
             if (snake.LocationX > GameBG.Width - 25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
             {
-                //gameOver(); Show label with reset button and score
+                // gameOver(); Show label with reset button and score
                 timer.Stop();
             }
             
@@ -222,10 +224,6 @@ namespace Matopeli
                 points.Remove(points.Last());           // remove last point to keep the wanted length
             }
         }
-
-
-
-
 
         private void Move() // create new points for the render function to utilize later
         {
