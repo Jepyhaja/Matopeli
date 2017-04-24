@@ -42,10 +42,10 @@ namespace Matopeli
 
         //update location
 
-        public void SetLocation()
+        public void SetLocation(double X, double Y)
         {
-            SetValue(Canvas.LeftProperty, LocationX);
-            SetValue(Canvas.TopProperty, LocationY);
+            SetValue(Canvas.LeftProperty, X);
+            SetValue(Canvas.TopProperty, Y);
         }
 
         

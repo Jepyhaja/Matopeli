@@ -34,9 +34,11 @@ namespace Matopeli
 
         // snake
         private Snake snake;
-
-        // private snake list
         private List<Snake> snakes;
+        // x, y for snake
+        private Point point;
+        // private snake placement list
+        private List<Point> points;
 
         // item
         private Item item;
@@ -72,26 +74,27 @@ namespace Matopeli
 
             snakes = new List<Snake>();
 
-            // create snake
-            snake = new Snake
-            {
-                LocationX = GameBG.Width / 2,
-                LocationY = GameBG.Height / 2
-            };
-           
-            snakes.Add(snake);
+            points = new List<Point>();
 
-            snake = new Snake
+            // create point
+            point = new Point(300, 300);
+            points.Add(point);
+            point = new Point(275, 300);
+            points.Add(point);
+            point = new Point(250, 300);
+            points.Add(point);
+            foreach(Point point in points)
             {
-                LocationX = (GameBG.Width / 2) + 25,
-                LocationY = (GameBG.Height / 2)
-            };
-            snakes.Add(snake);
+                snake = new Matopeli.Snake
+                {
+                    LocationX = point.X,
+                    LocationY = point.Y
+                };
+                snakes.Add(snake);
+                GameBG.Children.Add(snake);
+                snake.SetLocation(point.X, point.Y);
 
-            
-            //add snake
-            GameBG.Children.Add(snakes[0]);
-            GameBG.Children.Add(snakes[1]); // +25 px X-akselilla
+            }
             itemSpawn();
             //key listener
 
@@ -115,7 +118,7 @@ namespace Matopeli
         {
 
 
-            Rect SnakeRect = new Rect(snakes[0].LocationX, snakes[0].LocationY, snakes[0].ActualWidth, snakes[0].ActualHeight);
+            Rect SnakeRect = new Rect(snake.LocationX, snake.LocationY, snake.ActualWidth, snake.ActualHeight);
 
             Rect ItemRect = new Rect(item.LocationX, item.LocationY, item.ActualWidth, item.ActualHeight);
 
@@ -156,6 +159,7 @@ namespace Matopeli
             }
 
             
+
         }
 
 
@@ -164,7 +168,7 @@ namespace Matopeli
         {
 
             // madon collision handler seiniin
-            if (snakes[0].LocationX > GameBG.Width - 25 || snakes[0].LocationX < 0 || snakes[0].LocationY < 0 || snakes[0].LocationY > GameBG.Height - 25)
+            if (snake.LocationX > GameBG.Width - 25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
             {
                 //gameOver();
                 timer.Stop();
@@ -189,10 +193,10 @@ namespace Matopeli
 
              }*/
 
-            snakes[0].SetLocation();
 
-            checkCollision();
             
+            checkCollision();
+
         }
         /// <summary>
         /// https://gamedev.stackexchange.com/questions/24817/c-creating-a-simple-snake-game
@@ -201,19 +205,27 @@ namespace Matopeli
         private void Move()
         {
                 
-        switch(snake.direction) {
-        case "up":
-                snakes[0].LocationY -= snake.speed;
-        break;
-        case "down":
-                snakes[0].LocationY += snake.speed;
-        break;
-        case "left":
-                snakes[0].LocationX -= snake.speed;
-        break;
-        case "right":
-                snakes[0].LocationX += snake.speed;
-        break;
+       switch(snake.direction) {
+       case "up":
+                    point = new Point(points[0].X, points[0].Y - snake.speed);
+                    points.Insert(0, point);
+                    points.Remove(points[points.Count - 1]);
+       break;
+       case "down":
+                    point = new Point(points[0].X, points[0].Y + snake.speed);
+                    points.Insert(0, point);
+                    points.Remove(points[points.Count - 1]);
+       break;
+       case "left":
+                    point = new Point(points[0].X + snake.speed, points[0].Y);
+                    points.Insert(0, point);
+                    points.Remove(points[points.Count - 1]);
+       break;
+       case "right":
+                    point = new Point(points[0].X - snake.speed, points[0].Y);
+                    points.Insert(0, point);
+                    points.Remove(points[points.Count - 1]);
+       break;
 
             }
         }
