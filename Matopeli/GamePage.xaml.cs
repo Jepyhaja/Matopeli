@@ -73,14 +73,10 @@ namespace Matopeli
             this.InitializeComponent();
 
             snakes = new List<Snake>();
-
             points = new List<Point>();
 
             // create point
-            point = new Point(300, 300);
-            points.Add(point);
-            point = new Point(275, 300);
-            points.Add(point);
+           
             point = new Point(250, 300);
             points.Add(point);
             foreach(Point point in points)
@@ -90,7 +86,6 @@ namespace Matopeli
                     LocationX = point.X,
                     LocationY = point.Y
                 };
-                snakes.Add(snake);
                 GameBG.Children.Add(snake);
                 snake.SetLocation(point.X, point.Y);
 
@@ -194,9 +189,20 @@ namespace Matopeli
              }*/
 
 
+            foreach (Point point in points)
+            {
+                snake = new Matopeli.Snake
+                {
+                    LocationX = point.X,
+                    LocationY = point.Y
+                };
+                GameBG.Children.Add(snake);
+                snake.SetLocation(point.X, point.Y);
+
+            }
             
             checkCollision();
-
+            
         }
         /// <summary>
         /// https://gamedev.stackexchange.com/questions/24817/c-creating-a-simple-snake-game
@@ -208,8 +214,17 @@ namespace Matopeli
        switch(snake.direction) {
        case "up":
                     point = new Point(points[0].X, points[0].Y - snake.speed);
+                    snake = new Snake
+                    {
+                        LocationX = point.X,
+                        LocationY = point.Y
+                    };
+                    snakes.Insert(0, snake);
+                    snakes.Remove(snakes[snakes.Count - 1]);
                     points.Insert(0, point);
                     points.Remove(points[points.Count - 1]);
+
+                    
        break;
        case "down":
                     point = new Point(points[0].X, points[0].Y + snake.speed);
@@ -217,12 +232,12 @@ namespace Matopeli
                     points.Remove(points[points.Count - 1]);
        break;
        case "left":
-                    point = new Point(points[0].X + snake.speed, points[0].Y);
+                    point = new Point(points[0].X - snake.speed, points[0].Y);
                     points.Insert(0, point);
                     points.Remove(points[points.Count - 1]);
        break;
        case "right":
-                    point = new Point(points[0].X - snake.speed, points[0].Y);
+                    point = new Point(points[0].X + snake.speed, points[0].Y);
                     points.Insert(0, point);
                     points.Remove(points[points.Count - 1]);
        break;
