@@ -84,8 +84,8 @@ namespace Matopeli
             {
                 snake = new Snake       // create snake so we can draw it
                 {
-                    LocationX = point.X,  //useless (I guess)
-                    LocationY = point.Y   //useless (I guess)
+                    LocationX = point.X,  // useless (I guess)
+                    LocationY = point.Y   // useless (I guess)
                 };
                 snakes.Insert(0, snake);        // insert snake to the first slot of the snakes list
                 GameBG.Children.Insert(0, snakes[0]);   // draw the first snake in the snakes list to the canvas
@@ -217,7 +217,7 @@ namespace Matopeli
         
         private void removeTail() // this removes last point and last snake and corresponding snake from canvas
         {
-            if(points.Count > length) // this argument dictates snakes length
+            if (points.Count > length) // this argument dictates snakes length
             {
                 GameBG.Children.Remove(snakes.Last());  // remove drawn snake form canvas, must be done first
                 snakes.Remove(snakes.Last());           
