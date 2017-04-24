@@ -43,6 +43,8 @@ namespace Matopeli
         // item
         private Item item;
 
+        //Snake lenght
+        int length = 5;
 
         // keypresshandler
         private bool UpPressed;
@@ -66,6 +68,8 @@ namespace Matopeli
         //timer for keypresshandeler
         private DispatcherTimer keyTimer;
 
+
+        
         //audio
 
         public GamePage()
@@ -77,17 +81,18 @@ namespace Matopeli
 
             // create point
            
-            point = new Point(250, 300);
+            point = new Point(300, 300);
             points.Add(point);
             foreach(Point point in points)
             {
-                snake = new Matopeli.Snake
+                snake = new Snake
                 {
                     LocationX = point.X,
                     LocationY = point.Y
                 };
-                GameBG.Children.Add(snake);
-                snake.SetLocation(point.X, point.Y);
+                snakes.Insert(0, snake);
+                GameBG.Children.Insert(0, snakes[0]);
+                snakes[0].SetLocation(point.X, point.Y);
 
             }
             itemSpawn();
@@ -136,21 +141,33 @@ namespace Matopeli
 
                 // keypresshandelr tick
 
-             if (UpPressed && snake.direction != "down")
+             if (UpPressed && goingDown == false)
             {
-                snake.direction = "up";
+                goingUp = true;
+                goingDown = false;
+                goingLeft = false;
+                goingRight = false;
             }
-            if (DownPressed && snake.direction != "up")
+            if (DownPressed && goingUp == false)
             {
-                snake.direction = "down";
+                goingDown = true;
+                goingUp = false;
+                goingLeft = false;
+                goingRight = false;
             }
-            if (LeftPressed && snake.direction != "right")
+            if (LeftPressed && goingRight == false)
             {
-                snake.direction = "left";
+                goingLeft = true;
+                goingDown = false;
+                goingUp = false;
+                goingRight = false;
             }
-            if (RightPressed && snake.direction != "left")
+            if (RightPressed && goingLeft == false)
             {
-                snake.direction = "right";
+                goingRight = true;
+                goingDown = false;
+                goingLeft = false;
+                goingUp = false;
             }
 
             
@@ -162,45 +179,19 @@ namespace Matopeli
         private void timer_tick(object sender, object e)
         {
 
+            Move();
+
+            Rendersnake();
+
             // madon collision handler seiniin
             if (snake.LocationX > GameBG.Width - 25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
             {
                 //gameOver();
                 timer.Stop();
             }
-
-
-            Move();
-            /*
-            snakes[0].SetLocation();
-
-            snakes[1].LocationX = snakes[0].LocationX + 25;
-
-            snakes[1].LocationY = snakes[0].LocationY + 25;
-
-            snakes[1].SetLocation();
-            */
-
-            /* for (int i = 0; i < snakes.Count; i++)
-             {
-
-                 snakes[i].SetLocation();
-
-             }*/
-
-
-            foreach (Point point in points)
-            {
-                snake = new Matopeli.Snake
-                {
-                    LocationX = point.X,
-                    LocationY = point.Y
-                };
-                GameBG.Children.Add(snake);
-                snake.SetLocation(point.X, point.Y);
-
-            }
             
+            textBlock.Text = points.Count.ToString() ;
+
             checkCollision();
             
         }
@@ -208,41 +199,99 @@ namespace Matopeli
         /// https://gamedev.stackexchange.com/questions/24817/c-creating-a-simple-snake-game
         /// </summary>
 
+       private void Rendersnake()
+        {
+
+
+            if (points.Count > length) // length = 5
+            {
+               
+                    GameBG.Children.Remove(snakes.Last());
+                    GameBG.Children.Remove(snake);
+                    snakes.Remove(snakes.Last());
+                    points.Remove(points.Last());
+                
+            }
+
+            snake = new Snake // create snake 
+            {
+                LocationX = point.X, //the X cords of the latest point
+                LocationY = point.Y    //the Y cords of the latest point
+            };
+            snakes.Insert(0, snake); // add snake to snakes as first
+            GameBG.Children.Insert(0, snakes[0]); // add as first to the canvas
+            snakes[0].SetLocation(point.X, point.Y); // draw snake to canvas
+
+            
+
+         }
+
+
+
+
+
+
+
+
+
         private void Move()
         {
+
+            if (goingUp == true) {
+                point = new Point(points[0].X, points[0].Y - snake.speed);
+                snake = new Snake
+                {
+                    LocationX = point.X,
+                    LocationY = point.Y
+
+                };
+                snakes.Insert(0, snake);
+                snakes.Remove(snakes[snakes.Count - 1]);
+                points.Insert(0, point);
+               
+            };
+            if (goingDown == true)
+            {
+                point = new Point(points[0].X, points[0].Y + snake.speed);
+                snake = new Snake
+                {
+                    LocationX = point.X,
+                    LocationY = point.Y
+
+                };
+                snakes.Insert(0, snake);
+                snakes.Remove(snakes[snakes.Count - 1]);
+                points.Insert(0, point);
                 
-       switch(snake.direction) {
-       case "up":
-                    point = new Point(points[0].X, points[0].Y - snake.speed);
-                    snake = new Snake
-                    {
-                        LocationX = point.X,
-                        LocationY = point.Y
-                    };
-                    snakes.Insert(0, snake);
-                    snakes.Remove(snakes[snakes.Count - 1]);
-                    points.Insert(0, point);
-                    points.Remove(points[points.Count - 1]);
+            };
+            if (goingLeft == true)
+            {
+                point = new Point(points[0].X - snake.speed, points[0].Y);
+                snake = new Snake
+                {
+                    LocationX = point.X,
+                    LocationY = point.Y
 
-                    
-       break;
-       case "down":
-                    point = new Point(points[0].X, points[0].Y + snake.speed);
-                    points.Insert(0, point);
-                    points.Remove(points[points.Count - 1]);
-       break;
-       case "left":
-                    point = new Point(points[0].X - snake.speed, points[0].Y);
-                    points.Insert(0, point);
-                    points.Remove(points[points.Count - 1]);
-       break;
-       case "right":
-                    point = new Point(points[0].X + snake.speed, points[0].Y);
-                    points.Insert(0, point);
-                    points.Remove(points[points.Count - 1]);
-       break;
+                };
+                snakes.Insert(0, snake);
+                snakes.Remove(snakes[snakes.Count - 1]);
+                points.Insert(0, point);
+                
+            };
+            if (goingRight == true)
+            {
+                point = new Point(points[0].X + snake.speed, points[0].Y);
+                snake = new Snake
+                {
+                    LocationX = point.X,
+                    LocationY = point.Y
 
-            }
+                };
+                snakes.Insert(0, snake);
+                snakes.Remove(snakes[snakes.Count - 1]);
+                points.Insert(0, point);
+                
+            };
         }
 
         public void itemSpawn()
@@ -312,6 +361,11 @@ namespace Matopeli
             {
                 rootFrame.GoBack();
             }
+        }
+        
+        private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            textBlock.Text = "moro";
         }
     }
 }
