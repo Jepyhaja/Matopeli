@@ -153,9 +153,9 @@ namespace Matopeli
             }
 
             
-            for ( int i=1; i < snakes.Count (); i++)
+            for ( int i=1; i < snakes.Count (); i++) // loop tru the whole snake-list
             {
-                if (snakes[0].LocationX == snakes[i].LocationX && snakes[0].LocationY == snakes[i].LocationY)
+                if (snakes[0].LocationX == snakes[i].LocationX && snakes[0].LocationY == snakes[i].LocationY) //if the coordinates match any of the parts in the list
                 {
                     gameOver();
                 }
