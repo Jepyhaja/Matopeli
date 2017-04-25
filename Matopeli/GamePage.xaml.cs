@@ -118,21 +118,21 @@ namespace Matopeli
         private void LoadAudio()
         {
             LoadMusic();
-            //LoadRage();
+            LoadRage();
         }
 
         private async void LoadMusic()
         {
             StorageFolder folder =
                 await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
-            StorageFile file =
+            StorageFile Musicfile =
                 await folder.GetFileAsync("cheekiBreeki_asset.mp3");
-            var stream = await file.OpenAsync(FileAccessMode.Read);
+            var stream = await Musicfile.OpenAsync(FileAccessMode.Read);
 
             mediaElement = new MediaElement();
             mediaElement.AutoPlay = false;
             mediaElement.IsLooping = true;
-            mediaElement.SetSource(stream, file.ContentType);
+            mediaElement.SetSource(stream, Musicfile.ContentType);
             
         }
 
@@ -140,13 +140,13 @@ namespace Matopeli
         {
             StorageFolder folder =
                 await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
-            StorageFile file =
+            StorageFile Ragefile =
                 await folder.GetFileAsync("RAGE_asset.mp3");
-            var stream = await file.OpenAsync(FileAccessMode.Read);
+            var stream = await Ragefile.OpenAsync(FileAccessMode.Read);
 
-            mediaElement = new MediaElement();
-            mediaElement.AutoPlay = false;
-            mediaElement.SetSource(stream, file.ContentType);
+            mediaElement2 = new MediaElement();
+            mediaElement2.AutoPlay = false;
+            mediaElement2.SetSource(stream, Ragefile.ContentType);
 
         }
 
@@ -259,6 +259,7 @@ namespace Matopeli
             timer.Stop();
             //stop music
             mediaElement.Stop();
+            mediaElement2.Play(); // play rage
         }
 
        private void renderSnake() // draws latest point as a snake 
