@@ -7,9 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="white">
+
         <Button x:Name="BackButtonGP" Content="Back" HorizontalAlignment="Left" Margin="10,678,0,0" VerticalAlignment="Top" Click="BackButtonGP_Click"/>
-        <Canvas x:Name="GameBG" Width="700" Height="700" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AntiqueWhite" Opacity="0.7"/>
+        <Canvas x:Name="GameBG" Width="700" Height="700" HorizontalAlignment="Center" VerticalAlignment="Center" Background="AntiqueWhite" Opacity="0.7">
+
+            <Image Grid.RowSpan="2" Stretch="Fill" Source="Assets/map.jpg" VerticalAlignment="Top" HorizontalAlignment="Center" Height="690" Width="700"/>
+
+        </Canvas>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="97,155,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
     </Grid>

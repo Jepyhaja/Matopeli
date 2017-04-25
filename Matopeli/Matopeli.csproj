@@ -127,6 +127,7 @@
     <Content Include="Assets\cheekiBreeki_asset.mp3" />
     <Content Include="Assets\cheekiSneik.png" />
     <Content Include="Assets\items.png" />
+    <Content Include="Assets\map.jpg" />
     <Content Include="Assets\mehu.wav" />
     <Content Include="Assets\Miesääni.wav" />
     <Content Include="Assets\RAGE_asset.mp3" />
