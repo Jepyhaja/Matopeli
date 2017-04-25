@@ -129,6 +129,7 @@ namespace Matopeli
 
             mediaElement = new MediaElement();
             mediaElement.AutoPlay = false;
+            mediaElement.IsLooping = true;
             mediaElement.SetSource(stream, file.ContentType);
         }
 
