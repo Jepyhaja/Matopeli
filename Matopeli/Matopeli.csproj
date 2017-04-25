@@ -124,6 +124,7 @@
     <None Include="Matopeli_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\cheekiBreeki_asset.mp3" />
     <Content Include="Assets\items.png" />
     <Content Include="Assets\mehu.wav" />
     <Content Include="Assets\Miesääni.wav" />

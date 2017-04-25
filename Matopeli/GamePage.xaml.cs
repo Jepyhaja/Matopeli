@@ -67,7 +67,8 @@ namespace Matopeli
 
         // keypresshandler and the start argument for timer
         private DispatcherTimer keyTimer;
- 
+        private MediaElement mediaElement;
+
         // audio
 
         public GamePage()
@@ -94,7 +95,10 @@ namespace Matopeli
             }
 
             // spawn first item
-            itemSpawn(); 
+            itemSpawn();
+
+            // Load and start the music
+            LoadAudio();
 
             // key listener
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
@@ -112,6 +116,20 @@ namespace Matopeli
             keyTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             keyTimer.Tick += keyTimer_tick;
             keyTimer.Start();
+        }
+
+        // load audio
+        private async void LoadAudio()
+        {
+            StorageFolder folder =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file =
+                await folder.GetFileAsync("cheekiBreeki_asset.mp3");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            mediaElement = new MediaElement();
+            mediaElement.AutoPlay = false;
+            mediaElement.SetSource(stream, file.ContentType);
         }
 
         private void checkCollision()
@@ -173,6 +191,10 @@ namespace Matopeli
 
             if ((UpPressed == true || DownPressed == true || LeftPressed == true || RightPressed == true) && TimerOn == false) {
                 timer.Start(); // start gamelogic after an arrowkey is pressed
+
+                // start music
+                mediaElement.Play();
+
                 TimerOn = true;
             }
 
@@ -194,6 +216,8 @@ namespace Matopeli
             {
                 // gameOver(); Show label with reset button and score
                 timer.Stop();
+                //stop music
+                mediaElement.Stop();
             }
             
             textBlock.Text = points.Count.ToString(); // only for you my love(debug)
