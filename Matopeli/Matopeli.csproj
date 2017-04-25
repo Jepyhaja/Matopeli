@@ -129,6 +129,7 @@
     <Content Include="Assets\items.png" />
     <Content Include="Assets\mehu.wav" />
     <Content Include="Assets\Miesääni.wav" />
+    <Content Include="Assets\RAGE_asset.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

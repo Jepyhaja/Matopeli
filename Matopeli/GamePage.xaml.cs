@@ -65,7 +65,8 @@ namespace Matopeli
         // keypresshandler and the start argument for timer
         private DispatcherTimer keyTimer;
         private MediaElement mediaElement;
-        
+        private MediaElement mediaElement2;
+
         public GamePage()
         {
             this.InitializeComponent();
@@ -108,13 +109,19 @@ namespace Matopeli
 
             // start keypresshandler 60FPS
             keyTimer = new DispatcherTimer();
-            keyTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
+            keyTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             keyTimer.Tick += keyTimer_tick;
             keyTimer.Start();
         }
 
         // load audio
-        private async void LoadAudio()
+        private void LoadAudio()
+        {
+            LoadMusic();
+            //LoadRage();
+        }
+
+        private async void LoadMusic()
         {
             StorageFolder folder =
                 await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -126,6 +133,21 @@ namespace Matopeli
             mediaElement.AutoPlay = false;
             mediaElement.IsLooping = true;
             mediaElement.SetSource(stream, file.ContentType);
+            
+        }
+
+        private async void LoadRage() // ladataan ragesound
+        {
+            StorageFolder folder =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file =
+                await folder.GetFileAsync("RAGE_asset.mp3");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            mediaElement = new MediaElement();
+            mediaElement.AutoPlay = false;
+            mediaElement.SetSource(stream, file.ContentType);
+
         }
 
 
