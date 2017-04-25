@@ -117,7 +117,6 @@ namespace Matopeli
         private void checkCollision()
         {
 
-
             Rect SnakeRect = new Rect(snake.LocationX, snake.LocationY, snake.ActualWidth, snake.ActualHeight);
 
             Rect ItemRect = new Rect(item.LocationX, item.LocationY, item.ActualWidth, item.ActualHeight);
@@ -133,6 +132,9 @@ namespace Matopeli
                 itemSpawn();
 
                 length++;
+
+                timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (10 + length));
+
             }
 
         }
