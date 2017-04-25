@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     d:DesignHeight="25"
     d:DesignWidth="25">
-    <Rectangle Width="25" Height="25" RadiusX="15" RadiusY="15" RenderTransformOrigin="0.5,0.5">
+    <Rectangle x:Name="snakePart" Width="25" Height="25" RadiusX="15" RadiusY="15" RenderTransformOrigin="0.5,0.5">
         <Rectangle.RenderTransform>
             <CompositeTransform Rotation="37.873"/>
         </Rectangle.RenderTransform>

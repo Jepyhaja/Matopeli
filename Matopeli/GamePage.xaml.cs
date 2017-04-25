@@ -40,7 +40,8 @@ namespace Matopeli
 
         // item
         private Item item;
-
+        
+        
         // snake length
         int length = 2; // item eaten -> length ++
 
@@ -169,7 +170,7 @@ namespace Matopeli
                 itemSpawn();
 
                 length++;
-
+                
                 timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (10 + length));
 
             }
@@ -185,6 +186,8 @@ namespace Matopeli
 
         }
 
+
+        
 
         private void keyTimer_tick(object sender, object e){
 
@@ -262,6 +265,9 @@ namespace Matopeli
             mediaElement2.Play(); // play rage
         }
 
+
+
+
        private void renderSnake() // draws latest point as a snake 
         {
             
@@ -315,6 +321,7 @@ namespace Matopeli
 
         public void itemSpawn()
         {
+            
             double itemX = GameBG.Width;
             double itemY = GameBG.Height;
             Random random = new Random();
@@ -327,7 +334,7 @@ namespace Matopeli
             item.currentFrame = rand.Next(0, 5);
             GameBG.Children.Add(item);
             item.SetLocation();
-
+            
         }
         // basic setup for getting arrow keys to function
 

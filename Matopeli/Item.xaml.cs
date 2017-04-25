@@ -35,7 +35,7 @@ namespace Matopeli
         public Item()
         {
             this.InitializeComponent();
- 
+
             Random rand = new Random();
             // frame
             currentFrame = rand.Next(0, 5);

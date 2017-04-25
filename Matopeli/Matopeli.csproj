@@ -116,6 +116,8 @@
     <Compile Include="Snake.xaml.cs">
       <DependentUpon>Snake.xaml</DependentUpon>
     </Compile>
+    <Compile Include="System\Drawing.cs" />
+    <Compile Include="System\Windows\Media.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

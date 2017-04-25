@@ -30,6 +30,7 @@ namespace Matopeli
 
         public double LocationX { get; set; }
         public double LocationY { get; set; }
+        public string Color { get; set; }
 
 
         public Snake()
@@ -39,6 +40,12 @@ namespace Matopeli
         }
 
         
+        // change color
+        public void changeColor(byte a, byte r, byte g, byte b)
+        {
+            snakePart.Fill = new SolidColorBrush(Windows.UI.Color.FromArgb(a, r, g, b));
+        }
+
 
         //update location
 
