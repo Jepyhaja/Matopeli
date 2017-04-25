@@ -25,10 +25,7 @@ namespace Matopeli
 
     public sealed partial class GamePage : Page
     {
-
-        // gameoverscreen
-        private bool gameOver = false;
-
+        
         // snake
         private Snake snake;
 
@@ -68,9 +65,7 @@ namespace Matopeli
         // keypresshandler and the start argument for timer
         private DispatcherTimer keyTimer;
         private MediaElement mediaElement;
-
-        // audio
-
+        
         public GamePage()
         {
             this.InitializeComponent();
@@ -133,9 +128,10 @@ namespace Matopeli
             mediaElement.SetSource(stream, file.ContentType);
         }
 
+
         private void checkCollision()
         {
-
+            
             Rect SnakeRect = new Rect(snake.LocationX, snake.LocationY, snake.ActualWidth, snake.ActualHeight);
 
             Rect ItemRect = new Rect(item.LocationX, item.LocationY, item.ActualWidth, item.ActualHeight);
@@ -154,6 +150,15 @@ namespace Matopeli
 
                 timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (10 + length));
 
+            }
+
+            
+            for ( int i=1; i < snakes.Count (); i++)
+            {
+                if (snakes[0].LocationX == snakes[i].LocationX && snakes[0].LocationY == snakes[i].LocationY)
+                {
+                    gameOver();
+                }
             }
 
         }
@@ -217,16 +222,21 @@ namespace Matopeli
             // checks if snake is hitting the wall
             if (snake.LocationX > GameBG.Width - 25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
             {
-                // gameOver(); Show label with reset button and score
-                timer.Stop();
-                //stop music
-                mediaElement.Stop();
+                gameOver();
             }
             
             textBlock.Text = points.Count.ToString(); // only for you my love(debug)
-
+            
             checkCollision();
             
+        }
+
+        private void gameOver()
+        {
+            // gameOver(); Show label with reset button and score
+            timer.Stop();
+            //stop music
+            mediaElement.Stop();
         }
 
        private void renderSnake() // draws latest point as a snake 
