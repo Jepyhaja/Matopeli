@@ -17,7 +17,7 @@
 
         </Canvas>
         
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="205,25,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="24"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="205,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="24"/>
 
     </Grid>
 </Page>

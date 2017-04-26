@@ -11,9 +11,7 @@
         <Image Grid.RowSpan="2" Stretch="None" Source="Assets/cheekiSneik.png" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         <StackPanel VerticalAlignment="Center">
             <Button x:Name="PlayButton" Content="Play game" Width="110" HorizontalAlignment="Center" Click="PlayButton_Click"/>
-            <Button x:Name="ScoreButton" Content="Highscores" Width="110" HorizontalAlignment="Center" Margin="0,10,0,0" Click="ScoreButton_Click"/>
-            <Button x:Name="InfoButton" Content="Instructions" Width="110" HorizontalAlignment="Center" Margin="0,10,0,0" Click="InfoButton_Click"/>
-            <Button x:Name="ExitButton" Content="Exit game" Width="110" HorizontalAlignment="Center" Margin="0,10,0,0" Click="ExitButton_Click"/>
+            <Button x:Name="InfoButton" Content="Gopnik info" Width="110" HorizontalAlignment="Center" Margin="125,10,125,0" Click="InfoButton_Click"/>
         </StackPanel>
 
 

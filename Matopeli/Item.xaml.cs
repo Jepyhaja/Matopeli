@@ -38,7 +38,7 @@ namespace Matopeli
 
             Random rand = new Random();
             // frame
-            currentFrame = rand.Next(0, 4);
+            currentFrame = rand.Next(0, 5);
             if (currentFrame == 0)
             {
                 speedUp = 1;
@@ -58,6 +58,10 @@ namespace Matopeli
             if (currentFrame == 4)
             {
                 speedUp = 5;
+            }
+            if (currentFrame == 5)
+            {
+                speedUp = 6;
             }
             // set offset
             SpriteSheetOffset.Y = currentFrame * -frameHeigth;
