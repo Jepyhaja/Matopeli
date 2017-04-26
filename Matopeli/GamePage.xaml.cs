@@ -158,6 +158,12 @@ namespace Matopeli
 
         private void checkCollision()
         {
+
+            // checks if snake is hitting the wall
+            if (snake.LocationX > GameBG.Width - 25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
+            {
+                gameOver();
+            }
             
             Rect SnakeRect = new Rect(snake.LocationX, snake.LocationY, snake.ActualWidth, snake.ActualHeight);
 
@@ -266,12 +272,7 @@ namespace Matopeli
             renderSnake();
 
             removeTail();
-
-            // checks if snake is hitting the wall
-            if (snake.LocationX > GameBG.Width - 25 || snake.LocationX < 0 || snake.LocationY < 0 || snake.LocationY > GameBG.Height - 25)
-            {
-                gameOver();
-            }
+            
 
             textBlock.Text = score.ToString(); // only for you my love(debug)
             

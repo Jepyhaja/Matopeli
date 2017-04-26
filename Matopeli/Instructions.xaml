@@ -11,7 +11,25 @@
     </Page.Resources>
 
     <Grid RenderTransformOrigin="0.5,0.5" Background="White">
+        <Image Grid.RowSpan="2" Stretch="None" Source="Assets/cheekiSneik.png" VerticalAlignment="center" HorizontalAlignment="Center"/>
         <Button x:Name="BackButtonINS" Content="Back" HorizontalAlignment="Left" Margin="10,678,0,0" VerticalAlignment="Top" Click="BackButtonINS_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="470,305,334,131" TextWrapping="Wrap" VerticalAlignment="center" Height="284" Width="476" FontSize="22" FontFamily="Yu Gothic UI Light">
+            <Run Text="PELIOHJEET"/>
+            <LineBreak/>
+            <Run Text="1. Ohjaa matoa nuolinäppäimillä."/>
+            <LineBreak/>
+            <Run Text="2. Kerrää erilaisia tavaroita."/>
+            <LineBreak/>
+            <Run Text="3. Varo liikkumasta kartan ulkopuolelle."/>
+            <LineBreak/>
+            <Run Text="4. Älä syö itseäsi"/>
+            <LineBreak/>
+            <Run Text="5. Nauti tunnelmasta."/>
+            <LineBreak/>
+            <Run/>
+            <LineBreak/>
+            <Run Text="HUOM. Äänet päälle."/>
+        </TextBlock>
 
     </Grid>
 </Page>
