@@ -28,7 +28,7 @@ namespace Matopeli
         public int frameHeigth = 120;
 
         // item properties
-        public double moveMultiplier { get; set; }
+        public int speedUp { get; set; }
 
         
 
@@ -38,10 +38,26 @@ namespace Matopeli
 
             Random rand = new Random();
             // frame
-            currentFrame = rand.Next(0, 5);
+            currentFrame = rand.Next(0, 4);
+            if (currentFrame == 0)
+            {
+                speedUp = 1;
+            }
             if (currentFrame == 1)
             {
-                moveMultiplier = 1.2;
+                speedUp = 2;
+            }
+            if (currentFrame == 2)
+            {
+                speedUp = 3;
+            }
+            if (currentFrame == 3)
+            {
+                speedUp = 4;
+            }
+            if (currentFrame == 4)
+            {
+                speedUp = 5;
             }
             // set offset
             SpriteSheetOffset.Y = currentFrame * -frameHeigth;

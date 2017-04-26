@@ -40,10 +40,14 @@ namespace Matopeli
 
         // item
         private Item item;
-        
+
+        //score
+        int score = 0;
         
         // snake length
         int length = 2; // item eaten -> length ++
+        // how many items have been eaten
+        int itemsEaten = 0; // rect with item --> ++
 
         // keypresshandler
         private bool UpPressed;
@@ -165,18 +169,36 @@ namespace Matopeli
 
             if (!SnakeRect.IsEmpty)
             {
+                itemsEaten++;
+
                 GameBG.Children.Remove(item);
 
                 itemSpawn();
 
                 length++;
-                
-                timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (10 + length));
 
+                // gradual speedup logic:
+                if (length < 15)
+                {
+                    timer.Interval -= new TimeSpan(0, 0, 0, 0, 1000 / (100 * item.speedUp - (length + itemsEaten)));
+                }
+                if (length > 15 && length < 20)
+                {
+                    timer.Interval -= new TimeSpan(0, 0, 0, 0, 1000 / (200 * item.speedUp - (length + itemsEaten)));
+                }
+                if (length > 20 && length < 25)
+                {
+                    timer.Interval -= new TimeSpan(0, 0, 0, 0, 1000 / (350 * item.speedUp - (length + itemsEaten)));
+                }
+                if (length > 25)
+                {
+                    timer.Interval -= new TimeSpan(0, 0, 0, 0, 1000 / (450 * item.speedUp - (length + itemsEaten)));
+                }
+                score += ((itemsEaten + length) * item.speedUp);
             }
 
-            
-            for ( int i=1; i < snakes.Count (); i++) // loop tru the whole snake-list
+
+                for ( int i=1; i < snakes.Count (); i++) // loop tru the whole snake-list
             {
                 if (snakes[0].LocationX == snakes[i].LocationX && snakes[0].LocationY == snakes[i].LocationY) //if the coordinates match any of the parts in the list
                 {
@@ -249,8 +271,8 @@ namespace Matopeli
             {
                 gameOver();
             }
-            
-            textBlock.Text = points.Count.ToString(); // only for you my love(debug)
+
+            textBlock.Text = score.ToString(); // only for you my love(debug)
             
             checkCollision();
             
